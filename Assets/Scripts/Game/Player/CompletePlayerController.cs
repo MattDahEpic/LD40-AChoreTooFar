@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class CompletePlayerController : MonoBehaviour {
+    public static bool doControl = true;
 
 	public float speed;
 
@@ -18,12 +19,14 @@ public class CompletePlayerController : MonoBehaviour {
 		float moveVertical = Input.GetAxis ("Vertical");
 		Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
 		//and set velocity
-	    rb2d.velocity = movement*speed;
+	    if (doControl) rb2d.velocity = movement*speed;
+        else rb2d.velocity = Vector2.zero;
 	}
 
-	void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.CompareTag ("PickUp")) {
-			other.gameObject.SetActive(false);
+	void OnTriggerStay2D(Collider2D other) {
+		if (other.gameObject.CompareTag ("Interactable")) {
+            //TODO show interact control prompt
+			if (Input.GetKeyDown(KeyCode.Space)) other.GetComponent<IInteractable>().Interact(gameObject);
 		}
 	}
 }

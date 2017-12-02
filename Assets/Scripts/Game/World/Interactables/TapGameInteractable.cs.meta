@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 842fcbdf22fe5e84b9925ccce2d52359
+timeCreated: 1512231486
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - tapgamePrefab: {fileID: 1523216150828786, guid: fbeb06a208cec294abb5afa09031a424,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
