@@ -139,7 +139,9 @@ inline fixed4 swf_frag(swf_v2f_t IN) : SV_Target {
 	fixed4 c = tex2D(_MainTex, IN.uv);
 	fixed4 a = tex2D(_AlphaTex, IN.uv).r;
 	c.a = lerp(c.a, a.r, _ExternalAlpha);
-	c = c * IN.mulcolor + step(0.01, c.a) * IN.addcolor;
+	if ( c.a > 0.01 ) {
+		c = c * IN.mulcolor + IN.addcolor;
+	}
 	c.rgb *= c.a;
 	return c;
 }
@@ -148,8 +150,10 @@ inline fixed4 swf_grab_frag(swf_grab_v2f_t IN) : SV_Target {
 	fixed4 c = tex2D(_MainTex, IN.uv);
 	fixed4 a = tex2D(_AlphaTex, IN.uv).r;
 	c.a = lerp(c.a, a.r, _ExternalAlpha);
-	c = c * IN.mulcolor + step(0.01, c.a) * IN.addcolor;
-	c = grab_blend(_GrabTexture, IN.screenpos, c);
+	if ( c.a > 0.01 ) {
+		c = c * IN.mulcolor + IN.addcolor;
+		c = grab_blend(_GrabTexture, IN.screenpos, c);
+	}
 	c.rgb *= c.a;
 	return c;
 }
@@ -158,7 +162,9 @@ inline fixed4 swf_mask_frag(swf_mask_v2f_t IN) : SV_Target {
 	fixed4 c = tex2D(_MainTex, IN.uv);
 	fixed4 a = tex2D(_AlphaTex, IN.uv).r;
 	c.a = lerp(c.a, a.r, _ExternalAlpha);
-	clip(c.a - 0.01);
+	if ( c.a < 0.01 ) {
+		discard;
+	}
 	return c;
 }
 

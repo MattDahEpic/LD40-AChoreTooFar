@@ -11,15 +11,15 @@ namespace FTRuntime {
 #endif
 	public class SwfClip : MonoBehaviour {
 
-		MeshFilter            _meshFilter              = null;
-		MeshRenderer          _meshRenderer            = null;
+		MeshFilter            _meshFilter   = null;
+		MeshRenderer          _meshRenderer = null;
 	#if UNITY_5_6_OR_NEWER
-		SortingGroup          _sortingGroup            = null;
+		SortingGroup          _sortingGroup = null;
 	#endif
 
-		bool                  _dirtyMesh               = true;
-		SwfClipAsset.Sequence _curSequence             = null;
-		MaterialPropertyBlock _curPropBlock            = null;
+		bool                  _dirtyMesh    = true;
+		SwfClipAsset.Sequence _curSequence  = null;
+		MaterialPropertyBlock _curPropBlock = null;
 
 		// ---------------------------------------------------------------------
 		//
@@ -301,7 +301,7 @@ namespace FTRuntime {
 		/// Update all animation properties (for internal use only)
 		/// </summary>
 		public void Internal_UpdateAllProperties() {
-			ClearCache(false);
+			ClearCache();
 			ChangeTint();
 			ChangeClip();
 			ChangeSequence();
@@ -309,11 +309,11 @@ namespace FTRuntime {
 			ChangeSortingProperties();
 		}
 
-		void ClearCache(bool allow_to_create_components) {
-			_meshFilter   = SwfUtils.GetComponent<MeshFilter>  (gameObject, allow_to_create_components);
-			_meshRenderer = SwfUtils.GetComponent<MeshRenderer>(gameObject, allow_to_create_components);
+		void ClearCache() {
+			_meshFilter   = SwfUtils.GetOrCreateComponent<MeshFilter>(gameObject);
+			_meshRenderer = SwfUtils.GetOrCreateComponent<MeshRenderer>(gameObject);
 		#if UNITY_5_6_OR_NEWER
-			_sortingGroup = SwfUtils.GetComponent<SortingGroup>(gameObject, allow_to_create_components);
+			_sortingGroup = SwfUtils.GetOrCreateComponent<SortingGroup>(gameObject);
 		#endif
 			_dirtyMesh    = true;
 			_curSequence  = null;
@@ -389,19 +389,19 @@ namespace FTRuntime {
 					_curPropBlock = new MaterialPropertyBlock();
 				}
 				_meshRenderer.GetPropertyBlock(_curPropBlock);
-				_curPropBlock.SetColor(SwfUtils.TintShaderProp, tint);
+				_curPropBlock.SetColor("_Tint", tint);
 				var sprite = clip ? clip.Sprite : null;
 				var atlas  = sprite && sprite.texture ? sprite.texture : Texture2D.whiteTexture;
 				var atlasA = sprite ? sprite.associatedAlphaSplitTexture : null;
 				_curPropBlock.SetTexture(
-					SwfUtils.MainTexShaderProp,
+					"_MainTex",
 					atlas ? atlas : Texture2D.whiteTexture);
 				if ( atlasA ) {
-					_curPropBlock.SetTexture(SwfUtils.AlphaTexShaderProp, atlasA);
-					_curPropBlock.SetFloat(SwfUtils.ExternalAlphaShaderProp, 1.0f);
+					_curPropBlock.SetTexture("_AlphaTex", atlasA);
+					_curPropBlock.SetFloat("_ExternalAlpha", 1.0f);
 				} else {
-					_curPropBlock.SetTexture(SwfUtils.AlphaTexShaderProp, Texture2D.whiteTexture);
-					_curPropBlock.SetFloat(SwfUtils.ExternalAlphaShaderProp, 0.0f);
+					_curPropBlock.SetTexture("_AlphaTex", Texture2D.whiteTexture);
+					_curPropBlock.SetFloat("_ExternalAlpha", 0.0f);
 				}
 				_meshRenderer.SetPropertyBlock(_curPropBlock);
 			}
@@ -432,9 +432,11 @@ namespace FTRuntime {
 		//
 		// ---------------------------------------------------------------------
 
-		void Start() {
-			ClearCache(true);
+		void Awake() {
 			Internal_UpdateAllProperties();
+		}
+
+		void Start() {
 			EmitChangeEvents(true, true, true);
 		}
 

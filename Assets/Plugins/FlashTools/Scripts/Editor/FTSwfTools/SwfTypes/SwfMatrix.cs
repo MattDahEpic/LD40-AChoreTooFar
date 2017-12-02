@@ -19,7 +19,7 @@
 			}
 		}
 
-		public static SwfMatrix Read(SwfStreamReader reader) {
+		public static SwfMatrix Read(SwfStreamReader reader, bool fill_style) {
 			var matrix = SwfMatrix.identity;
 			var has_scale = reader.ReadBit();
 			if ( has_scale ) {

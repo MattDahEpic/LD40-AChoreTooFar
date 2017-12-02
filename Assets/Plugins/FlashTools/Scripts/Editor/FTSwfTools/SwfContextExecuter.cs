@@ -33,13 +33,10 @@ namespace FTSwfTools {
 
 		public SwfDisplayList Visit(PlaceObjectTag tag, SwfDisplayList dl) {
 			var is_shape  = Library.HasDefine<SwfLibraryShapeDefine >(tag.CharacterId);
-			var is_bitmap = Library.HasDefine<SwfLibraryBitmapDefine>(tag.CharacterId);
 			var is_sprite = Library.HasDefine<SwfLibrarySpriteDefine>(tag.CharacterId);
 			SwfDisplayInstance new_inst = null;
 			if ( is_shape ) {
 				new_inst = new SwfDisplayShapeInstance();
-			} else if ( is_bitmap ) {
-				new_inst = new SwfDisplayBitmapInstance();
 			} else if ( is_sprite ) {
 				new_inst = new SwfDisplaySpriteInstance();
 			}
@@ -59,7 +56,6 @@ namespace FTSwfTools {
 
 		public SwfDisplayList Visit(PlaceObject2Tag tag, SwfDisplayList dl) {
 			var is_shape  = tag.HasCharacter && Library.HasDefine<SwfLibraryShapeDefine >(tag.CharacterId);
-			var is_bitmap = tag.HasCharacter && Library.HasDefine<SwfLibraryBitmapDefine>(tag.CharacterId);
 			var is_sprite = tag.HasCharacter && Library.HasDefine<SwfLibrarySpriteDefine>(tag.CharacterId);
 			if ( tag.HasCharacter ) {
 				SwfDisplayInstance old_inst = null;
@@ -72,8 +68,6 @@ namespace FTSwfTools {
 				SwfDisplayInstance new_inst = null;
 				if ( is_shape ) {
 					new_inst = new SwfDisplayShapeInstance();
-				} else if ( is_bitmap ) {
-					new_inst = new SwfDisplayBitmapInstance();
 				} else if ( is_sprite ) {
 					new_inst = new SwfDisplaySpriteInstance();
 				}
@@ -107,7 +101,6 @@ namespace FTSwfTools {
 
 		public SwfDisplayList Visit(PlaceObject3Tag tag, SwfDisplayList dl) {
 			var is_shape  = tag.HasCharacter && Library.HasDefine<SwfLibraryShapeDefine >(tag.CharacterId);
-			var is_bitmap = tag.HasCharacter && Library.HasDefine<SwfLibraryBitmapDefine>(tag.CharacterId);
 			var is_sprite = tag.HasCharacter && Library.HasDefine<SwfLibrarySpriteDefine>(tag.CharacterId);
 			if ( tag.HasCharacter ) {
 				SwfDisplayInstance old_inst = null;
@@ -120,8 +113,6 @@ namespace FTSwfTools {
 				SwfDisplayInstance new_inst = null;
 				if ( is_shape ) {
 					new_inst = new SwfDisplayShapeInstance();
-				} else if ( is_bitmap ) {
-					new_inst = new SwfDisplayBitmapInstance();
 				} else if ( is_sprite ) {
 					new_inst = new SwfDisplaySpriteInstance();
 				}

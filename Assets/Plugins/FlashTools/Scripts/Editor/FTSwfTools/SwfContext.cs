@@ -71,7 +71,6 @@ namespace FTSwfTools {
 
 	public enum SwfDisplayInstanceType {
 		Shape,
-		Bitmap,
 		Sprite
 	}
 
@@ -91,12 +90,6 @@ namespace FTSwfTools {
 	public class SwfDisplayShapeInstance : SwfDisplayInstance {
 		public override SwfDisplayInstanceType Type {
 			get { return SwfDisplayInstanceType.Shape; }
-		}
-	}
-
-	public class SwfDisplayBitmapInstance : SwfDisplayInstance {
-		public override SwfDisplayInstanceType Type {
-			get { return SwfDisplayInstanceType.Bitmap; }
 		}
 	}
 
