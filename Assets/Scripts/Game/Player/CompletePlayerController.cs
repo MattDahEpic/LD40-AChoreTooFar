@@ -6,14 +6,16 @@ public class CompletePlayerController : MonoBehaviour {
     public static bool doControl = true;
 
 	public float speed;
+    public GameObject interactText;
 
 	private Rigidbody2D rb2d;
 
-	void Start() {
+	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
-	}
+	    interactText.SetActive(false);
+    }
 
-	void FixedUpdate() {
+	void FixedUpdate () {
 		//gether the current inputs
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
@@ -23,10 +25,14 @@ public class CompletePlayerController : MonoBehaviour {
         else rb2d.velocity = Vector2.zero;
 	}
 
-	void OnTriggerStay2D(Collider2D other) {
+	void OnTriggerStay2D (Collider2D other) {
 		if (other.gameObject.CompareTag ("Interactable")) {
-            //TODO show interact control prompt
-			if (Input.GetKeyDown(KeyCode.Space)) other.GetComponent<IInteractable>().Interact(gameObject);
+            interactText.SetActive(true); //show interact control prompt
+            if (Input.GetKeyDown(KeyCode.Space)) other.GetComponent<IInteractable>().Interact(gameObject);
 		}
 	}
+
+    void OnTriggerExit2D (Collider2D other) {
+        interactText.SetActive(false); //hide interact control prompt
+    }
 }

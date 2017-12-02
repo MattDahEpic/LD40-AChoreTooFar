@@ -4,26 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TapGameController : MonoBehaviour {
-    public int taps, tapGoal, round;
+    public int taps, tapGoal;
+    public Sprite tapBGUp, tapBGDown;
     public Text tapRemain;
+    public Image tapBG;
 	void Start () {
 	    taps = 0;
-	    tapGoal = 15; //TODO get level correct tapgoal
-	    round = 0;
+	    tapGoal = 30; //TODO get level correct tapgoal
+        //TODO time?
 	}
 	
 	void Update () {
-	    tapRemain.text = string.Format("Tap {F} times!",tapGoal-taps);
+	    tapRemain.text = tapGoal - taps + " remaining!";
+	    tapBG.sprite = Input.GetKey(KeyCode.Space) ? tapBGDown : tapBGUp;
 	    if (Input.GetKeyDown(KeyCode.Space)) taps++;
 	    if (taps > tapGoal) {
-	        round++;
-	        taps = 0;
-            //TODO find new tapgoal
-	        if (round >= 3) {
-	            //TODO add player xp
-	            CompletePlayerController.doControl = true;
-                Destroy(gameObject);
-	        }
+            //TODO add player xp
+	        CompletePlayerController.doControl = true; //re-enable player control
+            Destroy(gameObject); //and end the tapgame
 	    }
 	}
 }
