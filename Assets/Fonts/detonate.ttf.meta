@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 1ce74082d4f8e49489b3e174b565a0e8
+timeCreated: 1512340854
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Detonate BRK
+  fontNames:
+  - Detonate BRK
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
