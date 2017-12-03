@@ -18,7 +18,7 @@ public class TapGameController : MonoBehaviour {
 	    tapRemain.text = tapGoal - taps + " remaining!";
 	    tapBG.sprite = Input.GetKey(KeyCode.Space) ? tapBGDown : tapBGUp;
 	    if (Input.GetKeyDown(KeyCode.Space)) taps++;
-	    if (taps > tapGoal) {
+	    if (taps >= tapGoal) {
             //TODO add player xp
 	        CompletePlayerController.doControl = true; //re-enable player control
             Destroy(gameObject); //and end the tapgame
