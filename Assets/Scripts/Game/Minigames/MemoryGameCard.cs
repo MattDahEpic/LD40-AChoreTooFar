@@ -11,14 +11,8 @@ public class MemoryGameCard : MonoBehaviour {
     [HideInInspector] public bool solved = false;
 
     [HideInInspector] public Image img;
-    //private GameObject highlight;
 
     private void Start () {
         img = GetComponent<Image>();
-        //highlight = transform.GetChild(0).gameObject;
-    }
-
-    private void Update () {
-        //highlight.SetActive(EventSystem.current.currentSelectedGameObject == gameObject);
     }
 }

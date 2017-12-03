@@ -41,7 +41,7 @@ public class CompletePlayerController : MonoBehaviour {
 	void OnTriggerStay2D (Collider2D other) {
 		if (other.gameObject.CompareTag ("Interactable")) {
             interactText.SetActive(true); //show interact control prompt
-            if (Input.GetKeyDown(KeyCode.Space)) other.GetComponent<IInteractable>().Interact(gameObject);
+            if (Input.GetKeyDown(KeyCode.Space) && doControl) other.GetComponent<IInteractable>().Interact(gameObject);
 		}
 	}
 
