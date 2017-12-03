@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -34,8 +33,23 @@ public class MemoryGameController : MonoBehaviour {
 	            ((MemoryGameCard) cards.Current).type = type;
 	            cards.MoveNext();
 	        } while (cards.Current != null);
-	    } catch (InvalidOperationException) { } //jam code!
-	    yield return null; //wait for spacebar release
+	    } catch (System.InvalidOperationException) { } //jam code!
+        //shuffle the cards types
+	    int currentIndex = cardPlaces.Length, randomIndex;
+	    CardType temporaryValue;
+        while (0 != currentIndex) {
+
+	        // Pick a remaining element...
+	        randomIndex = Mathf.FloorToInt(Random.value * currentIndex);
+	        currentIndex -= 1;
+
+	        // And swap it with the current element.
+	        temporaryValue = cardPlaces[currentIndex].type;
+	        cardPlaces[currentIndex].type = cardPlaces[randomIndex].type;
+	        cardPlaces[randomIndex].type = temporaryValue;
+	    }
+
+        yield return null; //wait for spacebar release
 	    EventSystem.current.SetSelectedGameObject(cardPlaces[0].gameObject);
         //TODO time?
     }
@@ -60,6 +74,7 @@ public class MemoryGameController : MonoBehaviour {
             flipped = flip;
             yield break;
         }
+        if (flipped == flip) yield break; //cant select the same card twice
         GameObject sel = EventSystem.current.currentSelectedGameObject;
         EventSystem.current.SetSelectedGameObject(null);
         yield return new WaitForSeconds(0.5f);
