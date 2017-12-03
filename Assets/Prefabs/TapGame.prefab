@@ -63,7 +63,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &114435397877471356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,7 +125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taps: 0
   tapGoal: 0
-  round: 0
   tapBGUp: {fileID: 21300000, guid: 5a95523f4b3dce44880210aa84c42590, type: 3}
   tapBGDown: {fileID: 21300000, guid: c88c832a122d0d347a96fcfc79ba69b0, type: 3}
   tapRemain: {fileID: 114897040602543100}

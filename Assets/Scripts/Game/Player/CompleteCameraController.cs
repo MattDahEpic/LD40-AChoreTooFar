@@ -30,6 +30,7 @@ public class CompleteCameraController : MonoBehaviour {
 		transform.position = player.transform.position + offset;
         //do ui
 	    uiText.text = "<color=#ff00ff>" + TapGameController.plays + "</color> workouts\n" +
-	                  "<color=#ff00ff></color> memories";
+	                  "<color=#ff00ff>" + MemoryGameController.plays + "</color> memories\n" +
+	                  "";
 	}
 }
