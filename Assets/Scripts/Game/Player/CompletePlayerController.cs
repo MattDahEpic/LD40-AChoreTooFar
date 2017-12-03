@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using FTRuntime;
 using UnityEngine.UI;
 
 public class CompletePlayerController : MonoBehaviour {
@@ -7,6 +8,7 @@ public class CompletePlayerController : MonoBehaviour {
 
 	public float speed;
     public GameObject interactText;
+    public SwfClipController render;
 
 	private Rigidbody2D rb2d;
 
@@ -23,6 +25,22 @@ public class CompletePlayerController : MonoBehaviour {
 		//and set velocity
 	    if (doControl) rb2d.velocity = movement*speed;
         else rb2d.velocity = Vector2.zero;
+        //and set the render
+	    if (rb2d.velocity != Vector2.zero) {
+            Debug.Log(rb2d.velocity);
+	        if (rb2d.velocity.y != 0) { //vertical move
+                //TODO vertical move
+            } else { //horizontal move
+	            render.PlayIfNotAlreadyPlaying("jack_walk");
+	            if (rb2d.velocity.x > 0) { //moving right
+	                render.transform.localScale = new Vector3(-3,3,3);
+                } else { // moving left
+	                render.transform.localScale = new Vector3(3,3,3);
+                }
+	        }
+	    } else {
+	        render.PlayIfNotAlreadyPlaying("jack_idle");
+	    }
 	}
 
 	void OnTriggerStay2D (Collider2D other) {
