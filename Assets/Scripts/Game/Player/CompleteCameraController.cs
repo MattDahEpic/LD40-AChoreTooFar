@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class CompleteCameraController : MonoBehaviour {
+    public Text uiText;
 
 	public GameObject player;		//Public variable to store a reference to the player game object
 
@@ -26,5 +28,8 @@ public class CompleteCameraController : MonoBehaviour {
 	    }
 		// Set the position of the camera's transform to be the same as the player's, but offset by the calculated offset distance.
 		transform.position = player.transform.position + offset;
+        //do ui
+	    uiText.text = "<color=#ff00ff>" + TapGameController.plays + "</color> workouts\n" +
+	                  "<color=#ff00ff></color> memories";
 	}
 }
