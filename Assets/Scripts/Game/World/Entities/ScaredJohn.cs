@@ -7,6 +7,6 @@ public class ScaredJohn : MonoBehaviour {
     public SwfClipController render;
 
     void Update() {
-        if (QTEGameController.plays > 4) render.PlayIfNotAlreadyPlaying("john scared loop");
+        if (QTEGameController.plays >= 4) render.PlayIfNotAlreadyPlaying("john scared loop");
     }
 }
