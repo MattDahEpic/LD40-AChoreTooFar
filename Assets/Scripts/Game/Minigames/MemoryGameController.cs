@@ -35,9 +35,10 @@ public class MemoryGameController : MonoBehaviour {
 	        } while (cards.Current != null);
 	    } catch (System.InvalidOperationException) { } //jam code!
         //shuffle the cards types
-	    int currentIndex = cardPlaces.Length, randomIndex;
+	    /*TODO fix softlock 
+        int currentIndex = cardPlaces.Length, randomIndex;
 	    CardType temporaryValue;
-        while (0 != currentIndex) {
+        while (currentIndex > 0) {
 
 	        // Pick a remaining element...
 	        randomIndex = Mathf.FloorToInt(Random.value * currentIndex);
@@ -47,7 +48,7 @@ public class MemoryGameController : MonoBehaviour {
 	        temporaryValue = cardPlaces[currentIndex].type;
 	        cardPlaces[currentIndex].type = cardPlaces[randomIndex].type;
 	        cardPlaces[randomIndex].type = temporaryValue;
-	    }
+	    }*/
 
         yield return null; //wait for spacebar release
 	    EventSystem.current.SetSelectedGameObject(cardPlaces[0].gameObject);
