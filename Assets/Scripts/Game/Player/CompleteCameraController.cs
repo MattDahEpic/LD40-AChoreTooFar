@@ -31,7 +31,7 @@ public class CompleteCameraController : MonoBehaviour {
         //do ui
 	    uiText.text = "<color=#ff00ff>" + TapGameController.plays + "</color> workouts\n" +
 	                  "<color=#ff00ff>" + MemoryGameController.plays + "</color> memories\n" +
-	                  "<color=#ff00ff>"+QTEGameController.plays+"</color> shoppings" +
-	                  "";
+	                  "<color=#ff00ff>" + QTEGameController.plays + "</color> shoppings\n" +
+	                  "<color=#ff00ff>" + SimonGameController.plays + "</color> wife says";
 	}
 }
